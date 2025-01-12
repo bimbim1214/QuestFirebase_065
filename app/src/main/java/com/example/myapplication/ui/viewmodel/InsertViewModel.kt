@@ -2,6 +2,11 @@ package com.example.myapplication.ui.viewmodel
 
 import com.example.myapplication.model.Mahasiswa
 
+data class InsertUiState(
+    val insertUiEvent: MahasiswaEvent = MahasiswaEvent(),
+    val isEntryVallid: FormErrorState = FormErrorState(),
+)
+
 data class FormErrorState(
     val nim: String? = null,
     val nama: String? = null,
