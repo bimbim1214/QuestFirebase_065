@@ -125,12 +125,6 @@ fun InsertBodyMhs(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ){
-        FormMahasiswa(
-            mahasiswaEvent = uiState.insertUiEvent,
-            onValueChange =onValueChange,
-            errorState = uiState.isEntryVallid,
-            modifier  = Modifier.fillMaxWidth()
-        )
         Button(
             onClick = onClick,
             modifier = Modifier.fillMaxWidth(),
@@ -148,6 +142,13 @@ fun InsertBodyMhs(
                 Text("Add")
             }
         }
+        FormMahasiswa(
+            mahasiswaEvent = uiState.insertUiEvent,
+            onValueChange =onValueChange,
+            errorState = uiState.isEntryVallid,
+            modifier  = Modifier.fillMaxWidth()
+        )
+
     }
 }
 @Composable
@@ -160,7 +161,9 @@ fun FormMahasiswa(
     val jenisKelamin = listOf("Laki-laki", "Perempuan")
     val kelas = listOf("A", "B", "C", "D", "E")
 
-    Column (modifier = modifier.fillMaxWidth()
+    Column (modifier = modifier.fillMaxWidth(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
     ) {
         OutlinedTextField(
             modifier = Modifier.fillMaxWidth(),
@@ -193,7 +196,7 @@ fun FormMahasiswa(
             color = Color.Red
         )
 
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(2.dp))
         Text(text = "Jenis Kelamin")
         Row (
             modifier = Modifier.fillMaxWidth()
@@ -235,7 +238,7 @@ fun FormMahasiswa(
             color = Color.Red
         )
 
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(2.dp))
         Text(text = "Kelas")
         Row {
             kelas.forEach { kelas ->
@@ -273,6 +276,54 @@ fun FormMahasiswa(
         )
         Text(
             text = errorState.angkatan ?: "",
+            color = Color.Red
+        )
+
+        OutlinedTextField(
+            modifier = Modifier.fillMaxWidth(),
+            value = mahasiswaEvent.judul,
+            onValueChange = {
+                onValueChange(mahasiswaEvent.copy(judul = it))
+            },
+            label = { Text("Judul")},
+            isError = errorState.judul != null,
+            placeholder = { Text("Masukkan Judul")},
+
+        )
+        Text(
+            text = errorState.judul ?: "",
+            color = Color.Red
+        )
+
+        OutlinedTextField(
+            modifier = Modifier.fillMaxWidth(),
+            value = mahasiswaEvent.dosen1,
+            onValueChange = {
+                onValueChange(mahasiswaEvent.copy(dosen1 = it))
+            },
+            label = { Text("Dosen 1")},
+            isError = errorState.dosen1 != null,
+            placeholder = { Text("Masukkan Dosen 1")},
+
+        )
+        Text(
+            text = errorState.dosen1 ?: "",
+            color = Color.Red
+        )
+
+        OutlinedTextField(
+            modifier = Modifier.fillMaxWidth(),
+            value = mahasiswaEvent.dosen2,
+            onValueChange = {
+                onValueChange(mahasiswaEvent.copy(dosen2 = it))
+            },
+            label = { Text("Dosen 2")},
+            isError = errorState.dosen2 != null,
+            placeholder = { Text("Masukkan Dosen 2")},
+
+        )
+        Text(
+            text = errorState.dosen2 ?: "",
             color = Color.Red
         )
     }
